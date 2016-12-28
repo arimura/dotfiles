@@ -4,7 +4,7 @@ oh-my-zsh:
 	git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 install:
-	$(shell ./bootstrap.sh)
+	./bootstrap.sh
 
 # anyenv:
 # 	git clone https://github.com/riywo/anyenv.git ~/.anyenv
