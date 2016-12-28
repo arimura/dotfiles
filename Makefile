@@ -6,5 +6,5 @@ oh-my-zsh:
 install:
 	./bootstrap.sh
 
-# anyenv:
-# 	git clone https://github.com/riywo/anyenv.git ~/.anyenv
+anyenv:
+	git clone https://github.com/riywo/anyenv.git ~/.anyenv
