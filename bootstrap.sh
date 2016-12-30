@@ -7,6 +7,7 @@ function doIt() {
 			--exclude ".DS_store" \
 			--exclude "bootstrap.sh" \
 			--exclude "README.md" \
+			--exclude "Makefile" \
 			-avh --no-perms . ~;
 }
 
