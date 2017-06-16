@@ -305,7 +305,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; backspace on C-h
-  (keyboard-translate ?\C-h ?\C-?)
+  (define-key key-translation-map [?\C-h] [?\C-?])
   ;; backslash on yen for mac
   (define-key global-map [165] [92])
   ;; change window quickly
