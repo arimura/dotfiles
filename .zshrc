@@ -21,6 +21,7 @@ case "${OSTYPE}" in
     darwin*)
         if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
             alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+            alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
         fi
         ;;
 esac
