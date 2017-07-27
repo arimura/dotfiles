@@ -17,6 +17,11 @@ else
     echo "skip setting anyenv. anyenv work when login shell is set on zsh"
 fi
 
+## sdkman
+if [ -f $HOME/.sdkman/bin/sdkman-init.sh ]; then
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
 case "${OSTYPE}" in
     darwin*)
         if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
