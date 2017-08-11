@@ -30,3 +30,10 @@ case "${OSTYPE}" in
         fi
         ;;
 esac
+
+## go
+if command -v go >/dev/null 2>&1 ; then
+    export PATH=$PATH:$(go env GOPATH)/bin
+    export GOPATH=$(go env GOPATH)
+fi
+
