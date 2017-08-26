@@ -346,8 +346,8 @@ you should place your code here."
   (global-set-key (kbd "S-C-<down>") 'shrink-window)
   (global-set-key (kbd "S-C-<up>") 'enlarge-window)
   ;; buffer history
-  (define-key global-map (kbd "C-{") 'previous-buffer)
-  (define-key global-map (kbd "C-}") 'next-buffer)
+  (define-key global-map (kbd "M-[") 'previous-buffer)
+  (define-key global-map (kbd "M-]") 'next-buffer)
   ;; projectile
   (define-key global-map (kbd "M-p") 'projectile-find-file)
   ;; multiple cursors
