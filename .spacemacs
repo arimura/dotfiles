@@ -20,7 +20,7 @@ values."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation nil
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
    dotspacemacs-ask-for-lazy-installation t
@@ -316,6 +316,7 @@ you should place your code here."
   (define-key global-map (kbd "M-}") 'other-window)
   ;; for perl testing
   (add-to-list 'auto-mode-alist '("\\.t\\'" . perl-mode))
+  (add-to-list 'auto-mode-alist '("\\.m\\'" . objc-mode))
   ;; no line highlight
   (global-hl-line-mode -1)
   ;; show line number
