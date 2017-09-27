@@ -28,6 +28,8 @@ case "${OSTYPE}" in
             alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
             alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
         fi
+        #for sbin from homebrew
+        export PATH=${PATH}:/usr/local/sbin
         ;;
 esac
 
