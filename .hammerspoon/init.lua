@@ -40,3 +40,4 @@ appsWatcher:start()
 -- moving
 remapKey({'alt'}, 'f', keyCode('right', {'alt'}))
 remapKey({'alt'}, 'b', keyCode('left', {'alt'}))
+remapKey({'alt'}, 'v', keyCode('pageup',{'alt'}))
