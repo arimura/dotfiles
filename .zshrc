@@ -30,6 +30,10 @@ case "${OSTYPE}" in
         fi
         #for sbin from homebrew
         export PATH=/usr/local/bin:/usr/local/sbin:${PATH}
+        #adb
+        if [ -f $HOME/Library/Android/sdk/platform-tools/adb ]; then
+            export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
+        fi
         ;;
 esac
 
