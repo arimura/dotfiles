@@ -32,7 +32,7 @@ case "${OSTYPE}" in
         export PATH=/usr/local/bin:/usr/local/sbin:${PATH}
         #adb
         if [ -f $HOME/Library/Android/sdk/platform-tools/adb ]; then
-            export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
+            export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
         fi
         ;;
 esac
