@@ -28,8 +28,8 @@ case "${OSTYPE}" in
             alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
             alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
         fi
-        #for sbin from homebrew
-        export PATH=/usr/local/bin:/usr/local/sbin:${PATH}
+        #for homebrew
+        export PATH=/usr/local/opt/openssl/bin:/usr/local/bin:/usr/local/sbin:${PATH}
         #adb
         if [ -f $HOME/Library/Android/sdk/platform-tools/adb ]; then
             export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
