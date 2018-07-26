@@ -34,6 +34,10 @@ case "${OSTYPE}" in
         if [ -f $HOME/Library/Android/sdk/platform-tools/adb ]; then
             export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
         fi
+        #my tools
+        if [ -d $HOME/tools/android-ndk ]; then
+            export PATH=$PATH:$HOME/tools/android-ndk
+        fi
         ;;
 esac
 
