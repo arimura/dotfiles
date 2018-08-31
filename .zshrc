@@ -38,6 +38,9 @@ case "${OSTYPE}" in
         if [ -d $HOME/tools/android-ndk ]; then
             export PATH=$PATH:$HOME/tools/android-ndk
         fi
+        #nvm
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
         ;;
 esac
 
