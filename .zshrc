@@ -7,6 +7,9 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+#workaround for using nvm in tmux/byobu
+PATH="/usr/local/bin:$(getconf PATH)"
+
 ## anyenv
 if [[ $SHELL =~ "zsh" ]]; then
     if [ -d ${HOME}/.anyenv ]; then
