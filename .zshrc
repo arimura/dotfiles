@@ -47,7 +47,7 @@ case "${OSTYPE}" in
 
 	# The next line updates PATH for the Google Cloud SDK.
 	if [ -f '/Users/k-arimura/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/path.zsh.inc'; fi
-	if [ -f '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc';
+	if [ -f '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc'; fi
         ;;
 esac
 
