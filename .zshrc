@@ -12,7 +12,7 @@ PATH="/usr/local/bin:$(getconf PATH)"
 
 ## anyenv
 if [[ $SHELL =~ "zsh" ]]; then
-    if [ -d ${HOME}/.anyenv ]; then
+    if which anyenv > /dev/null; then
         export PATH="$HOME/.anyenv/bin:$PATH"
         eval "$(anyenv init -)"
     fi
