@@ -52,8 +52,7 @@ case "${OSTYPE}" in
 esac
 
 ## go
-if command -v /usr/local/go/bin/go >/dev/null 2>&1 ; then
-    export PATH=$PATH:/usr/local/go/bin:$(/usr/local/go/bin/go env GOPATH)/bin
+if which go >/dev/null; then
     export GOPATH=$(go env GOPATH)
 fi
 
