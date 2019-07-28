@@ -26,7 +26,7 @@ end
 local function handleGlobalAppEvent(name, event, app)
   if event == hs.application.watcher.activated then
     -- print(name)
-    if name == "Xcode" or name == "Android Studio" or name == "AppCode" or name == "IntelliJ IDEA" then
+    if name == "Xcode" or name == "Android Studio" or name == "AppCode" then
       enableAllHotkeys()
     else
       disableAllHotkeys()
