@@ -1,0 +1,39 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    { "key": "alt+f", "command": "cursorWordEndRight" },
+    { "key": "alt+B", "command": "cursorWordStartLeft" },
+    { "key": "ctrl+]", "command": "editor.action.smartSelect.expand" },
+    { "key": "ctrl+[", "command": "editor.action.smartSelect.shrink" },
+    { "key": "cmd+k", "command": "editor.action.copyLinesDownAction" },
+    { "key": "ctrl+x 3", "command": "workbench.action.splitEditorRight" },
+    { "key": "ctrl+x 2", "command": "workbench.action.splitEditorDown" },
+    { "key": "ctrl+x ctrl+s", "command": "workbench.action.files.save" },
+    { "key": "ctrl+x o", "command": "workbench.action.focusNextGroup" },
+    { "key": "ctrl+/", "command": "undo" },
+    {
+        "key": "ctrl+y",
+        "command": "editor.action.clipboardPasteAction"
+    },
+    {
+        "key": "alt+/",
+        "command": "hypertab.tab",
+        "when": "editorTextFocus && !editorHasMultiSelection && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible"
+    },
+    {
+        "key": "tab",
+        "command": "-hypertab.tab",
+        "when": "editorTextFocus && !editorHasMultiSelection && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible"
+    },
+    {
+        "key": "shift+alt+/",
+        "command": "hypertab.tab.back",
+        "when": "editorTextFocus && !editorHasMultiSelection && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible"
+    },
+    {
+        "key": "shift+tab",
+        "command": "-hypertab.tab.back",
+        "when": "editorTextFocus && !editorHasMultiSelection && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible"
+    }
+]
+
+

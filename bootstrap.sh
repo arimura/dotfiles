@@ -8,6 +8,8 @@ function doIt() {
 			--exclude "bootstrap.sh" \
 			--exclude "README.md" \
 			--exclude "Makefile" \
+			--exclude "keybindings.json" \
+			--exclude "emacs-ish.zip" \
 			-avh --no-perms . ~;
 }
 
