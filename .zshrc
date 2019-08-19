@@ -10,16 +10,6 @@ source $ZSH/oh-my-zsh.sh
 #workaround for using nvm in tmux/byobu
 PATH="/usr/local/bin:$(getconf PATH)"
 
-## anyenv
-if [[ $SHELL =~ "zsh" ]]; then
-    if which anyenv > /dev/null; then
-        export PATH="$HOME/.anyenv/bin:$PATH"
-        eval "$(anyenv init -)"
-    fi
-else
-    echo "skip setting anyenv. anyenv work when login shell is set on zsh"
-fi
-
 ## sdkman
 if [ -f $HOME/.sdkman/bin/sdkman-init.sh ]; then
     source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -67,3 +57,12 @@ if which go >/dev/null; then
     export PATH=$PATH:$GOPATH/bin
 fi
 
+## anyenv
+if [[ $SHELL =~ "zsh" ]]; then
+    if which anyenv > /dev/null; then
+        export PATH="$HOME/.anyenv/bin:$PATH"
+        eval "$(anyenv init -)"
+    fi
+else
+    echo "skip setting anyenv. anyenv work when login shell is set on zsh"
+fi
