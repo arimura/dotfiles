@@ -45,6 +45,11 @@ case "${OSTYPE}" in
 	    export PATH=$PATH:$HOME/Library/Python/2.7/bin
 	fi
 
+	#vscode
+	if [ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]; then
+	    export PATH=$PATH:'/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
+	fi
+
 	# The next line updates PATH for the Google Cloud SDK.
 	if [ -f '/Users/k-arimura/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/path.zsh.inc'; fi
 	if [ -f '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc'; fi
