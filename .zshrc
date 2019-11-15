@@ -50,6 +50,10 @@ case "${OSTYPE}" in
 	    export PATH=$PATH:'/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
 	fi
 
+	if [ -d '/usr/local/share/dotnet' ]; then
+	    export PATH=$PATH:'/usr/local/share/dotnet'
+	fi
+
 	# The next line updates PATH for the Google Cloud SDK.
 	if [ -f '/Users/k-arimura/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/path.zsh.inc'; fi
 	if [ -f '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/k-arimura/google-cloud-sdk/completion.zsh.inc'; fi
