@@ -40,6 +40,13 @@ case "${OSTYPE}" in
         export NVM_DIR="$HOME/.nvm"
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+        #sdkman java
+        if ! java -version |& grep HotSpot > /dev/null; then
+            if [ -d $HOME/.sdkman/candidates/java/oraclejdk1.8.0 ]; then
+                sdk default java oraclejdk1.8.0 > /dev/null
+            fi
+        fi
+
 	#pip lib
 	if [ -d $HOME/Library/Python/2.7/bin ]; then
 	    export PATH=$PATH:$HOME/Library/Python/2.7/bin
