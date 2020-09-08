@@ -70,7 +70,7 @@ esac
 ## go
 if which go >/dev/null; then
     export GOPATH=$(go env GOPATH)
-    export PATH=$PATH:$GOPATH/bin
+    export PATH=/usr/local/opt/go@1.14/bin:$PATH
 fi
 
 ## anyenv
