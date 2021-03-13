@@ -51,25 +51,25 @@ case "${OSTYPE}" in
 
         source ".functions"
 
-	#pip lib
-	if [ -d $HOME/Library/Python/2.7/bin ]; then
-	    export PATH=$PATH:$HOME/Library/Python/2.7/bin
-	fi
+        #pip lib
+        if [ -d $HOME/Library/Python/2.7/bin ]; then
+            export PATH=$PATH:$HOME/Library/Python/2.7/bin
+        fi
 
-	#vscode
-	if [ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]; then
-	    export PATH=$PATH:'/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
-	fi
+        #vscode
+        if [ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]; then
+            export PATH=$PATH:'/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
+        fi
 
-	if [ -d '/usr/local/share/dotnet' ]; then
-	    export PATH=$PATH:'/usr/local/share/dotnet'
-	fi
+        if [ -d '/usr/local/share/dotnet' ]; then
+            export PATH=$PATH:'/usr/local/share/dotnet'
+        fi
 
-    export PATH=$PATH:${HOME}/tools/bin
+        export PATH=$PATH:${HOME}/tools/bin
 
-	# The next line updates PATH for the Google Cloud SDK.
-	if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-	if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+        # The next line updates PATH for the Google Cloud SDK.
+        if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+        if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
         ;;
 esac
 
