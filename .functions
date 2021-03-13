@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+function ghqlook(){
+    which ghq > /dev/null || (echo "ghq required" && return 1)
+    which peco > /dev/null || (echo "peco required" && return 1)
+
+    dest=$(ghq list -p | peco)
+    len=${#dest}
+    if [ $len -gt 0 ]
+    then
+        cd $dest
+        return 0
+    fi
+    return 1
+}
