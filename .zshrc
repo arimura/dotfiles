@@ -51,6 +51,11 @@ case "${OSTYPE}" in
 
         source ".functions"
 
+        #ruby
+        if [ -d /opt/homebrew/opt/ruby/bin ]; then
+            export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+        fi
+
         #pip lib
         if [ -d $HOME/Library/Python/2.7/bin ]; then
             export PATH=$PATH:$HOME/Library/Python/2.7/bin
@@ -74,9 +79,14 @@ case "${OSTYPE}" in
 esac
 
 ## go
+if [ -d '/usr/local/go/bin' ]; then
+   export PATH=/usr/local/go/bin:$PATH
+fi
+if [ -d '' ]; then
+    export PATH=/usr/local/opt/go@1.14/bin:$PATH
+fi
 if which go >/dev/null; then
     export GOPATH=$(go env GOPATH)
-    export PATH=/usr/local/opt/go@1.14/bin:$PATH
 fi
 
 ## anyenv
