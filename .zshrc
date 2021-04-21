@@ -49,7 +49,7 @@ case "${OSTYPE}" in
             fi
         fi
 
-        source ".functions"
+        source "$HOME/.functions"
 
         #ruby
         if [ -d /opt/homebrew/opt/ruby/bin ]; then
