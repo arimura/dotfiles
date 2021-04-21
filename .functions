@@ -4,7 +4,13 @@ function ghqlook(){
     which ghq > /dev/null || (echo "ghq required" && return 1)
     which peco > /dev/null || (echo "peco required" && return 1)
 
-    dest=$(ghq list -p | peco)
+    if [ $# -ne 0 ]
+    then
+        dest=$(ghq list -p | peco --query $1)
+    else
+        dest=$(ghq list -p | peco)
+    fi
+
     len=${#dest}
     if [ $len -gt 0 ]
     then
