@@ -66,6 +66,11 @@ case "${OSTYPE}" in
             export PATH=$PATH:'/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
         fi
 
+        #flutter
+        if [ -d "$HOME/flutter" ]; then
+            export PATH=$PATH:$HOME/flutter/bin
+        fi
+
         if [ -d '/usr/local/share/dotnet' ]; then
             export PATH=$PATH:'/usr/local/share/dotnet'
         fi
