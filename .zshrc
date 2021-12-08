@@ -75,6 +75,11 @@ case "${OSTYPE}" in
             export PATH=$PATH:'/usr/local/share/dotnet'
         fi
 
+        #rust
+        if [ -d "$HOME/.cargo" ]; then
+            source $HOME/.cargo/env
+        fi
+
         export PATH=$PATH:${HOME}/tools/bin
 
         # The next line updates PATH for the Google Cloud SDK.
