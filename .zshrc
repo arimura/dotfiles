@@ -7,6 +7,8 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 bindkey -v
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
 
 #workaround for using nvm in tmux/byobu
 PATH="/usr/local/bin:$(getconf PATH)"
