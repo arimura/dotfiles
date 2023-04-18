@@ -83,6 +83,12 @@ case "${OSTYPE}" in
             source $HOME/.cargo/env
         fi
 
+        #n
+        #https://github.com/tj/n#optional-environment-variables
+        mkdir -p $HOME/.n
+        export N_PREFIX=$HOME/.n
+        export PATH=$N_PREFIX/bin:$PATH
+
         export PATH=$PATH:${HOME}/tools/bin
 
         # The next line updates PATH for the Google Cloud SDK.
