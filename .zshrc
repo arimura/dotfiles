@@ -117,3 +117,8 @@ if [[ $SHELL =~ "zsh" ]]; then
 else
     echo "skip setting anyenv. anyenv work when login shell is set on zsh"
 fi
+
+## local
+if [[ -f ~/.zshenv_local ]]; then
+    source ~/.zshenv_local
+fi
