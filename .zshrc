@@ -63,6 +63,9 @@ case "${OSTYPE}" in
         if [ -d $HOME/Library/Python/2.7/bin ]; then
             export PATH=$PATH:$HOME/Library/Python/2.7/bin
         fi
+        if [ -d $HOME/Library/Python/3.11/bin ]; then
+            export PATH=$PATH:$HOME/Library/Python/3.11/bin
+        fi
 
         #vscode
         if [ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]; then
