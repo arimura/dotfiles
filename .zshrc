@@ -104,8 +104,8 @@ esac
 if [ -d '/usr/local/go/bin' ]; then
    export PATH=/usr/local/go/bin:$PATH
 fi
-if [ -d '' ]; then
-    export PATH=/usr/local/opt/go@1.14/bin:$PATH
+if [ -d "$HOME/go/bin" ]; then
+   export PATH=$HOME/go/bin:$PATH
 fi
 if which go >/dev/null; then
     export GOPATH=$(go env GOPATH)
