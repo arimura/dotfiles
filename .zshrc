@@ -111,14 +111,17 @@ if which go >/dev/null; then
     export GOPATH=$(go env GOPATH)
 fi
 
-## anyenv
+## anyenv. To be removed.
 if [[ $SHELL =~ "zsh" ]]; then
     if which anyenv > /dev/null; then
         export PATH="$HOME/.anyenv/bin:$PATH"
         eval "$(anyenv init -)"
     fi
-else
-    echo "skip setting anyenv. anyenv work when login shell is set on zsh"
+fi
+
+## pyenv
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
 fi
 
 ## local
