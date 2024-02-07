@@ -60,8 +60,8 @@ case "${OSTYPE}" in
         fi
 
         #pip lib
-        if [ -d $HOME/Library/Python/2.7/bin ]; then
-            export PATH=$PATH:$HOME/Library/Python/2.7/bin
+        if [ -d $HOME/Library/Python/3.9/bin ]; then
+            export PATH=$PATH:$HOME/Library/Python/3.9/bin
         fi
         if [ -d $HOME/Library/Python/3.11/bin ]; then
             export PATH=$PATH:$HOME/Library/Python/3.11/bin
