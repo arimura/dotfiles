@@ -121,6 +121,12 @@ if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
 fi
 
+## check if python and python3 are installed
+## if phython not installed and python3 installed, set python3 as python
+if ! which python > /dev/null && which python3 > /dev/null; then
+    alias python=python3
+fi
+
 ## local
 if [[ -f ~/.zshenv_local ]]; then
     source ~/.zshenv_local
