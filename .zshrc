@@ -111,12 +111,9 @@ if which go >/dev/null; then
     export GOPATH=$(go env GOPATH)
 fi
 
-## anyenv. To be removed.
-if [[ $SHELL =~ "zsh" ]]; then
-    if which anyenv > /dev/null; then
-        export PATH="$HOME/.anyenv/bin:$PATH"
-        eval "$(anyenv init -)"
-    fi
+## nodenv
+if which nodenv > /dev/null; then
+    eval "$(nodenv init -)"
 fi
 
 ## pyenv
