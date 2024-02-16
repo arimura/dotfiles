@@ -121,6 +121,11 @@ if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
 fi
 
+## rbenv
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+fi
+
 ## check if python and python3 are installed
 ## if phython not installed and python3 installed, set python3 as python
 if ! which python > /dev/null && which python3 > /dev/null; then
