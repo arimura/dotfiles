@@ -130,6 +130,7 @@ fi
 ## if phython not installed and python3 installed, set python3 as python
 if ! which python > /dev/null && which python3 > /dev/null; then
     alias python=python3
+    alias pip=pip3
 fi
 
 ## local
