@@ -19,3 +19,15 @@ function ghqlook(){
     fi
     return 1
 }
+
+#arg: app store url
+function ituneslookup(){
+    local url=$1
+    local id=$(echo $url | sed -e 's/.*\/id\([0-9]*\).*/\1/')
+    local country=$(echo $url | sed -n 's/.*apps.apple.com\/\([a-z]*\)\/app.*/\1/p')
+    if [ -z "$country" ]; then
+        country=""
+    fi
+    local lookupurl="https://itunes.apple.com/$country/lookup?id=$id"
+    curl -s "$lookupurl" | jq 
+}
