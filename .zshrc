@@ -1,11 +1,3 @@
-
-# oh-my-zsh setting
-# https://github.com/robbyrussell/oh-my-zsh
-export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="robbyrussell"
-DISABLE_AUTO_UPDATE="true"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
 bindkey -v
 bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
@@ -137,3 +129,7 @@ fi
 if [[ -f ~/.zshenv_local ]]; then
     source ~/.zshenv_local
 fi
+
+# Evaluate at the end of .zshrc
+# https://starship.rs/ja-jp/#zsh 
+eval "$(starship init zsh)"
