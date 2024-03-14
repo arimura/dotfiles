@@ -129,3 +129,7 @@ fi
 if [[ -f ~/.zshenv_local ]]; then
     source ~/.zshenv_local
 fi
+
+# Evaluate at the end of .zshrc
+# https://starship.rs/ja-jp/#zsh 
+eval "$(starship init zsh)"
