@@ -3,6 +3,12 @@ add_newline = true
 [character]
 format = "[\\$](green bold) "
 
+[status]
+disabled = false
+success_symbol = ""
+format = "[$symbol$status]($style) "
+style = "bold red"
+
 [directory]
 truncation_length = 3
 
