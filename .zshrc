@@ -132,4 +132,4 @@ fi
 
 # Evaluate at the end of .zshrc
 # https://starship.rs/ja-jp/#zsh 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
