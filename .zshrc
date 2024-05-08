@@ -133,6 +133,3 @@ fi
 #alias
 alias ll="ls -l"
 
-# Evaluate at the end of .zshrc
-# https://starship.rs/ja-jp/#zsh 
-# eval "$(starship init zsh)"
