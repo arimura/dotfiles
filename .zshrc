@@ -133,3 +133,11 @@ fi
 #alias
 alias ll="ls -l"
 
+#for dlv
+#https://github.com/voyagegroup/fluct_dlv
+if [ -d "/opt/homebrew/opt/php@8.2" ]; then
+    export PATH="/opt/homebrew/opt/php@8.2/bin:$PATH"
+    export PATH="/opt/homebrew/opt/php@8.2/sbin:$PATH"
+    export CPPFLAGS="-I/opt/homebrew/include"
+fi
+
