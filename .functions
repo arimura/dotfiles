@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-function ghqlook(){
+# gl(ghq lookup) is a function to cd to a directory managed by ghq.
+function gl(){
     which ghq > /dev/null || (echo "ghq required" && return 1)
     which peco > /dev/null || (echo "peco required" && return 1)
 
