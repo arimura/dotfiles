@@ -133,6 +133,7 @@ fi
 #alias
 alias ll="ls -l"
 alias g="git"
+alias m="make"
 
 #for dlv
 #https://github.com/voyagegroup/fluct_dlv
