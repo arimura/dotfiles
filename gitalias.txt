@@ -86,6 +86,7 @@
   s = status
   w = whatchanged
   sw = switch
+  rs = restore
 
   ##
   # Short aliases for frequent commands and options.
