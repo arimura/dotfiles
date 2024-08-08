@@ -143,5 +143,10 @@ if [ -d "/opt/homebrew/opt/php@8.2" ]; then
     export CPPFLAGS="-I/opt/homebrew/include"
 fi
 
+# x11
+if [ -d /opt/X11/bin ]; then
+    export PATH=/opt/X11/bin:$PATH
+fi
+
 # git alias
 git config --global include.path "$HOME/gitalias.txt"
