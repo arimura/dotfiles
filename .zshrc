@@ -131,7 +131,7 @@ if [[ -f ~/.zshenv_local ]]; then
 fi
 
 #alias
-alias ll="ls -l"
+alias ll="ls -l --color"
 alias g="git"
 alias m="make"
 
