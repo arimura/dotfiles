@@ -150,3 +150,8 @@ fi
 
 # git alias
 git config --global include.path "$HOME/gitalias.txt"
+
+#pure prompt
+#https://github.com/sindresorhus/pure
+autoload -U promptinit; promptinit
+prompt pure
