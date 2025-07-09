@@ -155,3 +155,5 @@ git config --global include.path "$HOME/gitalias.txt"
 #https://github.com/sindresorhus/pure
 autoload -U promptinit; promptinit
 prompt pure
+
+#colorはiterm+dracura
