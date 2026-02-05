@@ -62,7 +62,8 @@ case "${OSTYPE}" in
             export PATH=$PATH:$HOME/.local/bin
         fi
 
-        
+        # cluade code
+        export PATH="$HOME/.local/bin:$PATH"
 
         #vscode
         if [ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]; then
