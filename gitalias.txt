@@ -87,6 +87,7 @@
   w = whatchanged
   sw = switch
   rs = restore
+  wt = worktree
 
   ##
   # Short aliases for frequent commands and options.
