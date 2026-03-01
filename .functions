@@ -32,3 +32,10 @@ function ituneslookup(){
     local lookupurl="https://itunes.apple.com/$country/lookup?id=$id"
     curl -s "$lookupurl" | jq 
 }
+
+# git repoのcoding agentのローカル設定を管理用リポジトリーから現在のディレクトリのgithub repoへのsym linkする
+# 管理用レポジトリーのパスは $CODINGAGENT_LOCAL_SETTINGS に設定されている
+# 管理用レポジトリでは、$CODINGAGENT_LOCAL_SETTINGS/github.com/hoge/fuga/.claude/settings.local.json のようなパスで管理されている
+# これを現在のディレクトリの git config --get remote.origin.url から取得する
+# remoteのURLがマッチしたものcluade codeのファイルをリンクする。今はclaude codeだけだが、将来的には他のcoding agentにも対応する
+
