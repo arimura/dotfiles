@@ -35,7 +35,88 @@ function ituneslookup(){
 
 # git repoのcoding agentのローカル設定を管理用リポジトリーから現在のディレクトリのgithub repoへのsym linkする
 # 管理用レポジトリーのパスは $CODINGAGENT_LOCAL_SETTINGS に設定されている
-# 管理用レポジトリでは、$CODINGAGENT_LOCAL_SETTINGS/github.com/hoge/fuga/.claude/settings.local.json のようなパスで管理されている
-# これを現在のディレクトリの git config --get remote.origin.url から取得する
-# remoteのURLがマッチしたものcluade codeのファイルをリンクする。今はclaude codeだけだが、将来的には他のcoding agentにも対応する
+function link-codingagent-local-settings(){
+    if [ -z "$CODINGAGENT_LOCAL_SETTINGS" ]; then
+        echo "CODINGAGENT_LOCAL_SETTINGS is not set"
+        return 1
+    fi
+    if [ ! -d "$CODINGAGENT_LOCAL_SETTINGS" ]; then
+        echo "CODINGAGENT_LOCAL_SETTINGS does not exist: $CODINGAGENT_LOCAL_SETTINGS"
+        return 1
+    fi
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1 || (echo "not in a git repository" && return 1)
 
+    local remote_url
+    remote_url=$(git config --get remote.origin.url)
+    if [ -z "$remote_url" ]; then
+        echo "remote.origin.url is empty"
+        return 1
+    fi
+
+    local host repo_path
+    case "$remote_url" in
+        git@*:* )
+            host="${remote_url#git@}"
+            host="${host%%:*}"
+            repo_path="${remote_url#*:}"
+            ;;
+        ssh://git@*/* )
+            local tmp
+            tmp="${remote_url#ssh://git@}"
+            host="${tmp%%/*}"
+            repo_path="${tmp#*/}"
+            ;;
+        https://*/* )
+            local tmp
+            tmp="${remote_url#https://}"
+            host="${tmp%%/*}"
+            repo_path="${tmp#*/}"
+            ;;
+        http://*/* )
+            local tmp
+            tmp="${remote_url#http://}"
+            host="${tmp%%/*}"
+            repo_path="${tmp#*/}"
+            ;;
+        * )
+            echo "unsupported remote URL format: $remote_url"
+            return 1
+            ;;
+    esac
+
+    repo_path="${repo_path%.git}"
+    repo_path="${repo_path#/}"
+
+    local src_root
+    src_root="$CODINGAGENT_LOCAL_SETTINGS/$host/$repo_path"
+    if [ ! -d "$src_root" ]; then
+        echo "local settings not found: $src_root"
+        return 1
+    fi
+
+    local linked=0 skipped=0 backuped=0
+    while IFS= read -r src; do
+        local rel dst dstdir timestamp
+        rel="${src#"$src_root"/}"
+        dst="$PWD/$rel"
+        dstdir="$(dirname "$dst")"
+        mkdir -p "$dstdir"
+
+        if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+            skipped=$((skipped + 1))
+            continue
+        fi
+
+        if [ -e "$dst" ] || [ -L "$dst" ]; then
+            timestamp="$(date +%Y%m%d%H%M%S)"
+            mv "$dst" "$dst.bak.$timestamp"
+            backuped=$((backuped + 1))
+        fi
+
+        ln -s "$src" "$dst"
+        linked=$((linked + 1))
+        echo "linked: $rel"
+    done < <(find "$src_root" -type f)
+
+    echo "done. linked=$linked skipped=$skipped backuped=$backuped"
+}
