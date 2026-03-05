@@ -120,3 +120,192 @@ function link-codingagent-local-settings(){
 
     echo "done. linked=$linked skipped=$skipped backuped=$backuped"
 }
+
+gh_comments() {
+  # Default: exclude outdated threads (GraphQL PullRequestReviewThread.isOutdated)
+  # stdout: JSON only
+  # stderr: logs/errors
+  #
+  # Usage:
+  #   gh_comments [options] [reviewer] [owner/repo] [pr_number]
+  #
+  # Options:
+  #   --no-outdated         Exclude outdated (DEFAULT)
+  #   --include-outdated    Include outdated
+  #   --no-bots             Exclude bot comments
+  #   --quiet               Suppress non-error logs
+  #   --repo OWNER/REPO     Specify repo
+  #   --pr NUMBER           Specify PR number
+  #   --limit N             Max comments to return (default 200)
+  #   -h, --help            Show help
+
+  local no_bots=false
+  local quiet=false
+  local include_outdated=false
+  local reviewer=""
+  local repo=""
+  local pr_number=""
+  local limit=200
+
+  log() { $quiet || printf '%s\n' "$*" >&2; }
+  die() { printf 'Error: %s\n' "$*" >&2; return 1; }
+  usage() {
+    cat >&2 <<'USAGE'
+Usage:
+  gh_comments [options] [reviewer] [owner/repo] [pr_number]
+
+Options:
+  --no-outdated         Exclude outdated (DEFAULT)
+  --include-outdated    Include outdated
+  --no-bots             Exclude bot comments
+  --quiet               Suppress non-error logs
+  --repo OWNER/REPO     Specify repo
+  --pr NUMBER           Specify PR number
+  --limit N             Max comments to return (default 200)
+  -h, --help            Show help
+USAGE
+  }
+
+  # --- options ---
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --no-bots) no_bots=true; shift ;;
+      --quiet) quiet=true; shift ;;
+      --no-outdated) include_outdated=false; shift ;;
+      --include-outdated) include_outdated=true; shift ;;
+      --repo) shift; [ -n "${1-}" ] || { usage; die "--repo requires owner/repo"; }; repo="$1"; shift ;;
+      --pr) shift; [ -n "${1-}" ] || { usage; die "--pr requires a number"; }; pr_number="$1"; shift ;;
+      --limit) shift; [ -n "${1-}" ] || { usage; die "--limit requires a number"; }; limit="$1"; shift ;;
+      -h|--help) usage; return 0 ;;
+      --) shift; break ;;
+      -*) usage; die "Unknown option: $1" ;;
+      *) break ;;
+    esac
+  done
+
+  # --- positional (back-compat) ---
+  if [ $# -gt 0 ] && [ -z "$reviewer" ]; then reviewer="$1"; shift; fi
+  if [ $# -gt 0 ] && [ -z "$repo" ]; then repo="$1"; shift; fi
+  if [ $# -gt 0 ] && [ -z "$pr_number" ]; then pr_number="$1"; shift; fi
+
+  command -v gh >/dev/null 2>&1 || die "GitHub CLI 'gh' not found"
+  command -v jq >/dev/null 2>&1 || die "'jq' not found"
+
+  if [ -z "$repo" ]; then
+    log "No repo specified, detecting from current directory..."
+    repo="$(gh repo view --json nameWithOwner -q .nameWithOwner 2>/dev/null)"
+    [ -n "$repo" ] || { usage; die "Could not detect repository. Specify owner/repo."; }
+    log "Detected repo: $repo"
+  fi
+  local owner="${repo%%/*}"
+  local name="${repo##*/}"
+
+  if [ -z "$pr_number" ]; then
+    log "No PR number specified, detecting from current branch..."
+    pr_number="$(gh pr view --json number -q .number 2>/dev/null)"
+    [ -n "$pr_number" ] || { usage; die "Could not detect PR number. Specify --pr."; }
+    log "Detected PR #$pr_number"
+  fi
+
+  $no_bots && log "Filtering: humans only (exclude bots)" || log "Filtering: including bots"
+  $include_outdated && log "Filtering: including outdated" || log "Filtering: excluding outdated (default)"
+  [ -n "$reviewer" ] && log "Filtering comments by reviewer: $reviewer" || log "No reviewer filter specified, showing all comments"
+  log "Limit: $limit"
+
+  # --- GraphQL (thread.isOutdated) ---
+  local gql='
+    query($owner:String!, $name:String!, $number:Int!, $after:String) {
+      repository(owner:$owner, name:$name) {
+        pullRequest(number:$number) {
+          reviewThreads(first: 50, after: $after) {
+            pageInfo { hasNextPage endCursor }
+            nodes {
+              isOutdated
+              comments(first: 50) {
+                nodes {
+                  author { login __typename }
+                  body
+                  diffHunk
+                  path
+                  line
+                  createdAt
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  '
+
+  local after=""   # empty => first page
+  local out="[]"
+
+  while :; do
+    local resp
+    if [ -z "$after" ]; then
+      resp="$(gh api graphql -f query="$gql" \
+        -F owner="$owner" -F name="$name" -F number="$pr_number")" || die "GraphQL request failed"
+    else
+      resp="$(gh api graphql -f query="$gql" \
+        -F owner="$owner" -F name="$name" -F number="$pr_number" -F after="$after")" || die "GraphQL request failed"
+    fi
+
+    # GraphQL errors (dataがあっても errors が返る)
+    if printf '%s' "$resp" | jq -e '.errors and (.errors|length>0)' >/dev/null 2>&1; then
+      printf '%s' "$resp" | jq -r '.errors[].message' >&2
+      die "GraphQL returned errors"
+    fi
+
+    # threads -> comments (thread.isOutdated を各コメントに付与してフィルタ)
+    local page_json
+    page_json="$(printf '%s' "$resp" | jq -c \
+      --arg reviewer "$reviewer" \
+      --argjson no_bots $($no_bots && echo true || echo false) \
+      --argjson include_outdated $($include_outdated && echo true || echo false) \
+      '
+      (.data.repository.pullRequest.reviewThreads.nodes // [])
+      | map(
+          . as $t
+          | ($t.comments.nodes // [])
+          | map(. + { threadOutdated: ($t.isOutdated // false) })
+        )
+      | add // []
+      | map(
+          select( ($include_outdated) or (.threadOutdated | not) )
+          | select( ($no_bots | not) or (.author.__typename == "User") )
+          | select( ($reviewer | length == 0) or (.author.login == $reviewer) )
+          | {
+              user: .author.login,
+              diff_hunk: .diffHunk,
+              line: .line,
+              start_line: null,
+              body: .body,
+              path: .path,
+              created_at: .createdAt,
+              url: .url
+            }
+        )
+      ')" || die "jq failed processing GraphQL response"
+
+    out="$(printf '%s' "$out" | jq -c --argjson b "$page_json" '. + $b')" || die "jq merge failed"
+
+    local n
+    n="$(printf '%s' "$out" | jq 'length')" || die "jq length failed"
+    if [ "$n" -ge "$limit" ]; then
+      printf '%s\n' "$out" | jq --argjson limit "$limit" '.[0:$limit]'
+      return 0
+    fi
+
+    local has_next end_cursor
+    has_next="$(printf '%s' "$resp" | jq -r '.data.repository.pullRequest.reviewThreads.pageInfo.hasNextPage')" || die "jq pageInfo failed"
+    end_cursor="$(printf '%s' "$resp" | jq -r '.data.repository.pullRequest.reviewThreads.pageInfo.endCursor')" || die "jq endCursor failed"
+
+    if [ "$has_next" != "true" ] || [ -z "$end_cursor" ] || [ "$end_cursor" = "null" ]; then
+      printf '%s\n' "$out"
+      return 0
+    fi
+    after="$end_cursor"
+  done
+}
