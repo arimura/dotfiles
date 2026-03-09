@@ -2,7 +2,16 @@
   "model": "opus",
   "permissions" : {
     "allow" : [
-      "Read(~/ghq/github.com/InteractiveAdvertisingBureau)"
+      "Read(~/ghq/github.com/InteractiveAdvertisingBureau)",
+      "Bash(ls *)",
+      "Bash(git log *)",
+      "Bash(xcodebuild *)",
+      "Bash(xcodegen *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
     ]
   }
 }
