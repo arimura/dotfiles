@@ -6,7 +6,10 @@
       "Bash(ls *)",
       "Bash(git log *)",
       "Bash(xcodebuild *)",
-      "Bash(xcodegen *)"
+      "Bash(xcrun simctl list devices booted)",
+      "Bash(xcrun simctl install *)",
+      "Bash(xcodegen *)",
+      "Bash(pod install)"
     ],
     "deny": [
       "Read(./.env)",
