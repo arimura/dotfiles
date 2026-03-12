@@ -3,6 +3,7 @@
   "permissions" : {
     "allow" : [
       "Read(~/ghq/github.com/InteractiveAdvertisingBureau)",
+      "Edit(./buf.local.md)",
       "Bash(ls *)",
       "Bash(git log *)",
       "Bash(xcodebuild *)",
