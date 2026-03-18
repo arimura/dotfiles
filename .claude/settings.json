@@ -5,6 +5,7 @@
       "Read(~/ghq/github.com/InteractiveAdvertisingBureau)",
       "Edit(./buf.local.md)",
       "Bash(ls *)",
+      "Bash(find *)",
       "Bash(git log *)",
       "Bash(xcodebuild *)",
       "Bash(xcrun simctl list devices booted)",
