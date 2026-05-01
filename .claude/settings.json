@@ -10,12 +10,15 @@
       "Bash(find *)",
       "Bash(git log *)",
       "Bash(grep *)",
+      "Bash(which *)",
       "Bash(xcodebuild *)",
-      "Bash(xcrun simctl list devices booted)",
+      "Bash(xcrun simctl list *)",
       "Bash(xcrun simctl install *)",
       "Bash(xcrun simctl launch *)",
       "Bash(xcodegen *)",
-      "Bash(pod install)"
+      "Bash(pod install)",
+      "Bash(set -o pipefail)",
+      "Bash(bundle exec xcpretty)"
     ],
     "deny": [
       "Read(./.env)",
