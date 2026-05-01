@@ -19,7 +19,6 @@
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./secrets/**)",
-      "Bash(xcrun simctl boot *)",
       "Bash(tee *)",
       "Bash(python *)",
       "Bash(awk *)",
