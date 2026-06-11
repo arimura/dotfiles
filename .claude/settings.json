@@ -21,21 +21,16 @@
       "Read(./secrets/**)",
       "Bash(tee *)",
       "Bash(python *)",
+      "Bash(perl *)",
       "Bash(awk *)",
       "Bash(xcrun *)",
       "Bash(xcodebuild *)"
     ]
   },
-  "extraKnownMarketplaces": {
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "codex@openai-codex": true
+  "statusLine": {
+      "type": "command",
+      "command": "$HOME/.claude/statusline-command.sh",
+      "padding": 0
   },
   "autoMemoryEnabled": false
 }
