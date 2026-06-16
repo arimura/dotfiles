@@ -26,6 +26,7 @@
       "Bash(find * -delete *)",
       "Bash(find * -delete)",
       "Bash(tee *)",
+      "Bash(cd *)",
       "Bash(python *)",
       "Bash(perl *)",
       "Bash(awk *)",
