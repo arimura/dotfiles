@@ -2,6 +2,4 @@
 - `./tmp.local` は多くの場合に最初から存在しているので`ls`で確認する。
 - MEMORY.md に記録しない。
 - claude codeの MEMORY は絶対に利用しない。
-- 人間の approve が必要になる redirect や expansion が含まれるshell commandは実行しない
-- 人間の approve が必要になる cd を使った複合コマンドは実行しない
- 
+- 人間の approve が必要になる redirect や expansion/shell変数展開 が含まれるshell commandは実行しない
